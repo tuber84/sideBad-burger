@@ -44,7 +44,13 @@ function onMenuClick(e) {
       gotoBlock.getBoundingClientRect().top +
       scrollY -
       document.querySelector(`header`).offsetHeight;
-
+    // "убирам" боковое меню в мобильной версии  при клике на пункт меню:
+    if (iconMenu.classList.contains(`_active`)) {
+      document.body.classList.remove(`_lock`);
+      iconMenu.classList.remove(`_active`);
+      menuBody.classList.remove(`_active`);
+    }
+    // ------------------------------------------------------------------
     window.scrollTo({
       top: gotoBlockValue,
       behavior: "smooth",
@@ -53,9 +59,17 @@ function onMenuClick(e) {
   }
 }
 
-// console.log(menuLinks);
+//-----боковое меню по нажатию на "бугер"---------//
+const iconMenu = document.querySelector(`.menu__icon`);
+const menuBody = document.querySelector(`.menu__body`);
 
-// for (const menuLink of menuLinks) {
-//     console.log(menuLink);
-
-// }
+console.log(iconMenu);
+if (iconMenu) {
+  console.log(menuBody);
+  iconMenu.addEventListener(`click`, function (e) {
+    document.body.classList.toggle(`_lock`);
+    iconMenu.classList.toggle(`_active`);
+    menuBody.classList.toggle(`_active`);
+  });
+}
+// ----------------------------------------------------
